@@ -12,8 +12,6 @@ USER technisys
 
 WORKDIR $TECHNISYS_HOME
 
-COPY --chown=technisys start.sh .
-
 ENTRYPOINT sh start.sh
 
 ARG curl_opts
@@ -26,9 +24,6 @@ RUN curl $curl_opts -o $platform_artifact_name.jar $artifact_url && \
     sha1sum $platform_artifact_name.jar | grep $artifact_sha1 && \
     mkdir assets
 
-COPY --chown=technisys assets assets
-
-COPY --chown=technisys apis.csv .
 
 ENV DEBUG_MODE=false
 
